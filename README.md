@@ -1,13 +1,16 @@
-- [ ] vim
-- [ ] zsh
-- [ ] vscode
-- [ ] zellij
-- [ ] git
-- [ ] kubectl
+## Packages
+
+- [ ] bat
 - [ ] btop
 - [ ] eza
-- [ ] bat
 - [ ] fastfetch
+- [ ] ghostty
+- [ ] git*
+- [ ] kubectl
+- [ ] vim
+- [ ] vscode
+- [ ] zellij
+- [ ] zsh
 
 ## Generation
 
@@ -25,3 +28,10 @@
 10   2026-05-13 15:03:45
     + zellij
     + ghostty
+
+## Todo
+
+- sops-nix
+- agenix
+- cachix
+- LUKS
