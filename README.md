@@ -1,3 +1,5 @@
+sudo nix --extra-experimental-features 'nix-command flakes' run nixpkgs#nixos-rebuild -- switch --flake ~/nixos#hostname
+
 ## Packages
 
 - [ ] bat
