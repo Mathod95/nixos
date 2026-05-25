@@ -8,6 +8,8 @@
 { config, lib, pkgs, ... }:
 
 {
+nix.settings.experimental-features = [ "nix-command" "flakes" ];
+
 #  imports = [
 #    # include NixOS-WSL modules
 #    <nixos-wsl/modules>
