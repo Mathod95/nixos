@@ -5,6 +5,7 @@
     ./zsh/zsh.nix
     ./fastfetch/fastfetch.nix
     ./eza/eza.nix
+    ./btop/btop.nix
   ];
 
   home.username = "mathod";
