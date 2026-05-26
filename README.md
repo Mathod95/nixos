@@ -46,6 +46,10 @@ ssh-keygen -t ed25519 -C "NixOS" -f $HOME/.ssh/nixos
 ``` nix title="bootstrap from github"
 sudo nix --extra-experimental-features "nix-command flakes" run nixpkgs#nixos-rebuild -- switch --flake github:Mathod95/nixos#<configuration>
 ```
+
+``` nix title="Update from github"
+sudo nix --extra-experimental-features "nix-command flakes" run nixpkgs#nixos-rebuild -- switch --flake github:Mathod95/nixos#wsl --refresh
+```
 </details>
 
 ---
