@@ -1,41 +1,51 @@
-``` nix
-sudo nix --extra-experimental-features "nix-command flakes" run nixpkgs#nixos-rebuild -- switch --flake github:Mathod95/nixos#wsl
-```
+# Packages
 
-## Packages
+|PACKAGE|COMMON|VM|WSL|LAPTOP|DESKTOP|CONFIG|
+|---|:---:|:---:|:---:|:---:|:---:|:---:|
+|**flakes**|✅| configuration.nix |configuration.nix|||
+|**nix-command**|✅| configuration.nix |configuration.nix|||
+|**git**||||||
+|**[eza](https://github.com/eza-community/eza)**||||||
+|**[zsh](https://github.com/zsh-users/zsh)**||||||
+|**[vim](https://github.com/vim/vim)**||||||
+|**[bat](https://github.com/sharkdp/bat)**||||||
+|**[btop](https://github.com/aristocratos/btop)**||||||
+|**[fastfetch](https://github.com/fastfetch-cli/fastfetch)**||||||
+|**[zsh](https://github.com/zsh-users/zsh)**||||||
+|**[zellij](https://github.com/zellij-org/zellij)**||||||
 
-- [ ] bat
-- [ ] btop
-- [ ] eza
-- [ ] fastfetch
-- [ ] ghostty
-- [ ] git*
-- [ ] kubectl
-- [ ] vim
-- [ ] vscode
-- [ ] zellij
-- [ ] zsh
 
-## Generation
-
-6   2026-05-13 14:38:14
-    + fastfetch
-7   2026-05-13 14:47:48
-    + btop
-8   2026-05-13 14:51:27
-    + bat
-    * fix evaluation warning:
-        - `services.xserver.desktopManager.gnome.enable` has been renamed to `services.desktopManager.gnome.enable`
-        - `services.xserver.displayManager.gdm.enable` has been renamed to `services.displayManager.gdm.enable`
-9   2026-05-13 14:56:52
-    + eza
-10   2026-05-13 15:03:45
-    + zellij
-    + ghostty
-
-## Todo
+# Todo
 
 - sops-nix
 - agenix
 - cachix
 - LUKS
+
+## Commands 
+
+<details>
+<summary><b>WSL</b></summary>
+
+``` powershell title="Delete WSL"
+wsl --unregister NixOS
+```
+</details>
+
+<details>
+<summary><b>SSH</b></summary>
+
+``` bash title="Create SSH key"
+ssh-keygen -t ed25519 -C "NixOS" -f $HOME/.ssh/nixos
+```
+</details>
+
+<details>
+<summary><b>NIX</b></summary>
+
+``` nix title="bootstrap from github"
+sudo nix --extra-experimental-features "nix-command flakes" run nixpkgs#nixos-rebuild -- switch --flake github:Mathod95/nixos#<configuration>
+```
+</details>
+
+---
