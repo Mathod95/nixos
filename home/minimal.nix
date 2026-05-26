@@ -4,6 +4,7 @@
   imports = [
     ./zsh/zsh.nix
     ./fastfetch/fastfetch.nix
+    ./eza/eza.nix
   ];
 
   home.username = "mathod";

@@ -5,5 +5,10 @@
 {
   programs.eza = {
     enable = true;
+    icons = "auto";
+    colors = "auto";
+    extraOptions = [
+      "--group-directories-first" # dossiers en premier
+    ];
   };
 }
