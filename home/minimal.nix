@@ -2,13 +2,8 @@
 
 {
   imports = [
-    ./git/git.nix
-    ./vim/vim.nix
+    ./zsh/zsh.nix
     ./fastfetch/fastfetch.nix
-    ./btop/btop.nix
-    ./bat/bat.nix
-    ./eza/eza.nix
-    ./zellij/zellij.nix
   ];
 
   home.username = "mathod";
