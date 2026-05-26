@@ -6,5 +6,9 @@
 {
   programs.zellij = {
     enable = true;
+    enableZshIntegration = true;
+    exitShellOnExit = true; # ferme le terminal quand tu quittes zellij
   };
+
+  xdg.configFile."zellij/config.kdl".source = ./zellij/config.kdl;
 }
