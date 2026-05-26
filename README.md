@@ -1,4 +1,6 @@
-sudo nix --extra-experimental-features 'nix-command flakes' run nixpkgs#nixos-rebuild -- switch --flake ~/nixos#hostname
+``` nix
+sudo nix --extra-experimental-features "nix-command flakes" run nixpkgs#nixos-rebuild -- switch --flake github:Mathod95/nixos#wsl
+```
 
 ## Packages
 
