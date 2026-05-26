@@ -1,17 +1,17 @@
 # Packages
 
-|PACKAGE|COMMON|VM|WSL|LAPTOP|DESKTOP|CONFIG|
-|---|:---:|:---:|:---:|:---:|:---:|:---:|
-|**flakes**|✅| configuration.nix |configuration.nix|||
-|**nix-command**|✅| configuration.nix |configuration.nix|||
+|PACKAGE|CORE|VM|WSL|LAPTOP|DESKTOP|CONFIG|COMMENT|
+|---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
+|**flakes**|✅||✅|||
+|**nix-command**|✅||✅|||
 |**git**||||||
-|**[eza](https://github.com/eza-community/eza)**||||||
-|**[zsh](https://github.com/zsh-users/zsh)**||||||
+|**[eza](https://github.com/eza-community/eza)**|✅||✅|||
+|**[zsh](https://github.com/zsh-users/zsh)**|✅||✅|||
 |**[vim](https://github.com/vim/vim)**||||||
 |**[bat](https://github.com/sharkdp/bat)**||||||
-|**[btop](https://github.com/aristocratos/btop)**||||||
-|**[fastfetch](https://github.com/fastfetch-cli/fastfetch)**||||||
-|**[zsh](https://github.com/zsh-users/zsh)**||||||
+|**[btop](https://github.com/aristocratos/btop)**|✅||✅|||
+|**[fastfetch](https://github.com/fastfetch-cli/fastfetch)**|✅||✅|||
+|**[zsh](https://github.com/zsh-users/zsh)**|✅||✅|||
 |**[zellij](https://github.com/zellij-org/zellij)**||||||
 
 
