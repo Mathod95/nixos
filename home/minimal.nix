@@ -6,6 +6,7 @@
     ./fastfetch/fastfetch.nix
     ./eza/eza.nix
     ./btop/btop.nix
+    ./git/git.nix
     ./zellij/zellij.nix
   ];
 
