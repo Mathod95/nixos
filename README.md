@@ -2,8 +2,8 @@
 
 | PACKAGE                                                   | CORE | VM   | WSL  | LAPTOP | DESKTOP | CONFIG | COMMENT |
 |-----------------------------------------------------------|:----:|:----:|:----:|:------:|:-------:|:------:|:-------:|
-|**flakes**                                                 | [x]  |      |      |        |         |        |         |
-|**nix-command**                                            | [x]  |      |      |        |         |        |         |
+|**flakes**                                                 | ![Yes][yes]   |      |      |        |         |        |         |
+|**nix-command**                                            | ✅  |      |      |        |         |        |         |
 |**git**                                                    |      |      |      |        |         |        |         |
 |**[eza](https://github.com/eza-community/eza)**            |      |      |      |        |         |        |         |
 |**[zsh](https://github.com/zsh-users/zsh)**                |      |      |      |        |         |        |         |
