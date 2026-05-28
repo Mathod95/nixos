@@ -2,8 +2,8 @@
 
 | PACKAGE                                                   | CORE | VM   | WSL  | LAPTOP | DESKTOP | CONFIG | COMMENT |
 |-----------------------------------------------------------|:----:|:----:|:----:|:------:|:-------:|:------:|:-------:|
-|**flakes**                                                 | ![Yes][yes]   |      |      |        |         |        |         |
-|**nix-command**                                            | ✅  |      |      |        |         |        |         |
+|**flakes**                                                 |      |      |      |        |         |        |         |
+|**nix-command**                                            |      |      |      |        |         |        |         |
 |**git**                                                    |      |      |      |        |         |        |         |
 |**[eza](https://github.com/eza-community/eza)**            |      |      |      |        |         |        |         |
 |**[zsh](https://github.com/zsh-users/zsh)**                |      |      |      |        |         |        |         |
@@ -78,6 +78,15 @@ sudo nix --extra-experimental-features "nix-command flakes" run nixpkgs#nixos-re
 ``` nix title="Update from github"
 sudo nix --extra-experimental-features "nix-command flakes" run nixpkgs#nixos-rebuild -- switch --flake github:Mathod95/nixos#wsl --refresh
 ```
+
+```bash
+nix flake update
+```
+
+```bash
+sudo nixos-rebuild switch --flake .#<ton-hostname>
+```
+
 </details>
 
 ---
