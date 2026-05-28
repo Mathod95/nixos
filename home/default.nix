@@ -3,7 +3,8 @@
 {
   imports = [
     ./git/git.nix
-    ./vscode/vscode.nix
+    #./vscode/vscode.nix
+    ./spotify/spotify.nix
     ./vim/vim.nix
     ./fastfetch/fastfetch.nix
     ./btop/btop.nix
