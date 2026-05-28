@@ -38,7 +38,8 @@
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
-#  programs.nix-ld.enable = true;
+  # Enable the Visual Studio Code editor
+  programs.nix-ld.enable = true;
 #  environment.systemPackages = with pkgs; [
 #    vscode
 #    wget
