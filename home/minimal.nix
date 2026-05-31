@@ -2,17 +2,17 @@
 
 {
   imports = [
-    ./bat/bat.nix
-    ./btop/btop.nix
-    ./eza/eza.nix
-    ./fastfetch/fastfetch.nix
-    #./ghostty/ghostty.nix
-    ./git/git.nix
-    #./packages/spotify.nix
-    ./vim/vim.nix
-    ./vscode/vscode.nix
-    ./zellij/zellij.nix
-    ./zsh/zsh.nix
+    ./modules/bat/bat.nix
+    ./modules/btop/btop.nix
+    ./modules/eza/eza.nix
+    ./modules/fastfetch/fastfetch.nix
+    #./modules/ghostty/ghostty.nix
+    ./modules/git/git.nix
+    #./packages/packages.nix
+    ./modules/vim/vim.nix
+    ./modules/vscode/vscode.nix
+    ./modules/zellij/zellij.nix
+    ./modules/zsh/zsh.nix
   ];
 
   home.username = "mathod";
