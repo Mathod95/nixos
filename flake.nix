@@ -52,7 +52,6 @@
       laptop = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [
-          nixos-wsl.nixosModules.default
           ./hosts/laptop/configuration.nix
           home-manager.nixosModules.home-manager
           {
