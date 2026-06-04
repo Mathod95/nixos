@@ -7,11 +7,17 @@
       url = "github:nix-community/home-manager/release-25.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    nixos-wsl.url = "github:nix-community/NixOS-WSL";
-    nixos-wsl.inputs.nixpkgs.follows = "nixpkgs";
+    nixos-wsl = {
+      url = "github:nix-community/NixOS-WSL";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    sops-nix = {
+      url = "github:Mic92/sops-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = inputs@{ nixpkgs, home-manager, nixos-wsl, ... }: {
+  outputs = inputs@{ nixpkgs, home-manager, nixos-wsl, sops-nix, ... }: {
     nixosConfigurations = {
 
       vm = nixpkgs.lib.nixosSystem {
@@ -23,7 +29,7 @@
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
             home-manager.extraSpecialArgs = { inherit inputs; };
-            home-manager.users.mathod = ./home/minimal.nix;
+            home-manager.users.mathod = ./modules/default.nix;
           }
         ];
       };
@@ -38,7 +44,22 @@
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
             home-manager.extraSpecialArgs = { inherit inputs; };
-            home-manager.users.mathod = ./home/minimal.nix;
+            home-manager.users.mathod = ./modules/default.nix;
+          }
+        ];
+      };
+
+      laptop = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        modules = [
+          nixos-wsl.nixosModules.default
+          ./hosts/laptop/configuration.nix
+          home-manager.nixosModules.home-manager
+          {
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+            home-manager.extraSpecialArgs = { inherit inputs; };
+            home-manager.users.mathod = ./modules/default.nix;
           }
         ];
       };

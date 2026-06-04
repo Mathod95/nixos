@@ -90,3 +90,10 @@ sudo nixos-rebuild switch --flake .#<ton-hostname>
 </details>
 
 ---
+
+
+---
+
+Sources:
+
+https://codeberg.org/woker/nixdots
