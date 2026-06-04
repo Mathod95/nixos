@@ -12,6 +12,7 @@
     pkgs.git
     pkgs.vim
     pkgs.vscode
+    pkgs.google-chrome
   ];
 }
 
