@@ -11,8 +11,9 @@ repo_name = "Mathod95/nixos"
 edit_uri = "edit/main/docs/"
 
 nav = [
-  { "Accueil" = "index.md" },
+  { "Home" = "index.md" },
   { "Scope" = "scope.md" },
+  { "Flake" = "flake.md" },
 ]
 
 extra_css = ["stylesheets/toggle-sidebar.css", "stylesheets/codeBlock.css", "stylesheets/open-in-new-tab.css", "stylesheets/placeholders.css"]
