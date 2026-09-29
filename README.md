@@ -1,25 +1,34 @@
 # nixos
 
-Configuration NixOS personnelle en Nix flakes, pour 7 machines, avec home-manager, secrets chiffrés via sops-nix + age, et partitionnement déclaratif via disko.
+Configuration NixOS personnelle en Nix flakes. La documentation du projet est publiée sur [mathod95.github.io/nixos](https://mathod95.github.io/nixos/).
 
-La documentation du projet (veille, architecture cible, scope) est publiée sur [mathod95.github.io/nixos](https://mathod95.github.io/nixos/).
+## Apply the configuration
 
-## Structure
-
-- `docs/` contient le contenu Markdown du site de documentation, ainsi que les scripts et styles additionnels (`docs/javascripts/`, `docs/stylesheets/`).
-- `overrides/` contient les templates HTML surchargeant ceux du thème Zensical.
-- `zensical.toml` est la configuration du site (navigation, thème, extensions Markdown).
-- `.github/workflows/docs.yml` construit et publie le site sur GitHub Pages à chaque changement sur `docs/`, `overrides/`, `zensical.toml` ou le workflow lui-même.
-
-Les personnalisations du site (toggle-sidebar, on-this-page, codeBlock, open-in-new-tab, placeholders) viennent du dépôt [Mathod95/zensical](https://github.com/Mathod95/zensical).
-
-## Documentation en local
+Depuis GitHub, sans cloner le repo, en remplaçant `workstation` par le nom de la machine (`workstation`, `laptop`, `wsl`):
 
 ```bash
-python3 -m venv .venv
-source .venv/bin/activate
-pip install zensical
-zensical serve
+sudo nixos-rebuild switch --flake github:Mathod95/nixos#workstation --refresh
 ```
 
-Le site est servi sur `http://localhost:8000`.
+- `#workstation` choisit la configuration de la machine.
+- `--refresh` force Nix à récupérer le dernier commit, au lieu d'une version gardée en cache jusqu'à une heure.
+
+Depuis un clone local du repo:
+
+```bash
+sudo nixos-rebuild switch --flake .#workstation
+```
+
+## First switch on a fresh install
+
+- **Flakes**: `nixos-rebuild --flake` active lui-même les flakes pour sa commande. Si l'erreur `experimental Nix feature 'flakes' is disabled` apparaît malgré tout, ajouter `--option experimental-features 'nix-command flakes'`. La configuration les active ensuite de façon permanente.
+- **Nom d'hôte**: Une machine fraîchement installée s'appelle `nixos`. Le nom de la machine est donc obligatoire dans la commande (`#workstation`), et le nom d'hôte change avec le switch. Redémarrer ensuite pour qu'il soit pris en compte partout, puis vérifier avec `hostname` et `nixos-version`.
+- **Mot de passe**: La configuration n'en définit aucun, celui créé à l'installation est conservé.
+
+## Rollback
+
+Choisir la génération précédente dans le menu de démarrage, ou:
+
+```bash
+sudo nixos-rebuild switch --rollback
+```
