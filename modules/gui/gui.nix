@@ -1,3 +1,4 @@
+{ inputs, ... }:
 {
   # Base commune à toutes les machines graphiques, quel que soit le WM/DE
   flake.modules.nixos.gui = {
@@ -16,6 +17,10 @@
     };
 
     services.printing.enable = true;
-    programs.firefox.enable = true;
+
+    # Applications graphiques, ajoutées à chaque utilisateur home-manager de la machine
+    home-manager.sharedModules = with inputs.self.modules.homeManager; [
+      ghostty
+    ];
   };
 }
