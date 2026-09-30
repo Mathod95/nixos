@@ -36,9 +36,12 @@ todo:
 │   ├── gui/
 │   │   ├── gui.nix                    # base graphique commune (clavier, audio, impression)
 │   │   └── gnome.nix                  # GDM + GNOME
-│   ├── programs/
-│   │   └── ghostty/
-│   │       └── ghostty.nix            # terminal (home-manager)
+│   ├── programs/                      # une application home-manager par dossier
+│   │   ├── ghostty/
+│   │   │   └── ghostty.nix            # terminal (profil gui)
+│   │   ├── k9s/
+│   │   │   └── k9s.nix                # outils console (profil minimal)
+│   │   └── …                          # eza, fastfetch, fd, fzf, git, helm, kubecolor, kubectl, kubectx
 │   └── users/
 │       └── mathod.nix                 # utilisateur + home-manager
 └── hosts/

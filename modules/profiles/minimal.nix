@@ -1,3 +1,4 @@
+{ inputs, ... }:
 {
   # Base commune à toutes les machines, WSL compris
   flake.modules.nixos.minimal = {
@@ -20,5 +21,19 @@
     time.timeZone = "Europe/Paris";
     i18n.defaultLocale = "fr_FR.UTF-8";
     console.keyMap = "fr";
+
+    # Outils console, ajoutés à chaque utilisateur home-manager de la machine
+    home-manager.sharedModules = with inputs.self.modules.homeManager; [
+      git
+      eza
+      fastfetch
+      fd
+      fzf
+      helm
+      kubectl
+      kubectx
+      k9s
+      kubecolor
+    ];
   };
 }
