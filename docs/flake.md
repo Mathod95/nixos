@@ -6,7 +6,8 @@ status: draft
 createdAt: 2026-09-30
 modifyAt: 2026-09-30
 todo:
-  - "[ ] Tester le premier switch sur la workstation, le laptop et WSL"
+  - "[x] Tester le premier switch sur la workstation"
+  - "[ ] Tester le premier switch sur le laptop et WSL"
 ---
 
 # Flake
@@ -33,8 +34,11 @@ todo:
 │   │   ├── systemd-boot.nix           # bootloader UEFI
 │   │   └── networkmanager.nix         # réseau
 │   ├── gui/
-│   │   ├── gui.nix                    # base graphique commune (clavier, audio, impression, Firefox)
+│   │   ├── gui.nix                    # base graphique commune (clavier, audio, impression)
 │   │   └── gnome.nix                  # GDM + GNOME
+│   ├── programs/
+│   │   └── ghostty/
+│   │       └── ghostty.nix            # terminal (home-manager)
 │   └── users/
 │       └── mathod.nix                 # utilisateur + home-manager
 └── hosts/
@@ -163,8 +167,10 @@ Ou directement depuis GitHub, sans cloner le repo:
 $ sudo nixos-rebuild switch --flake github:Mathod95/nixos#<host>
 ```
 
+!!! info "Flakes on a fresh install"
+    `nixos-rebuild --flake` active lui-même les flakes pour sa commande, même sur une installation fraîche où ils sont désactivés. Si l'erreur `experimental Nix feature 'flakes' is disabled` apparaît malgré tout, ajouter `--option experimental-features 'nix-command flakes'`. La config les active ensuite de façon permanente (profil `minimal`).
+
 !!! warning "Premier switch"
-    - **Flakes**: Une installation fraîche n'a pas encore les flakes activés. Pour ce premier switch, il faut les activer ponctuellement, par exemple avec `--option experimental-features 'nix-command flakes'`. La config les active ensuite de façon permanente (profil `minimal`).
     - **Nom d'hôte**: Les machines installées s'appellent encore `nixos`. Le premier switch se fait donc en nommant la machine explicitement (`.#workstation`), et le nom d'hôte change avec lui.
     - **WSL**: L'utilisateur par défaut passe de `nixos` à `mathod`. NixOS-WSL demande pour ça une procédure spéciale (`nixos-rebuild boot`, pas `switch`, puis redémarrage de la distro), décrite dans la [documentation NixOS-WSL](https://nix-community.github.io/NixOS-WSL/how-to/change-username.html).
 

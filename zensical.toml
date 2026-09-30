@@ -14,6 +14,11 @@ nav = [
   { "Home" = "index.md" },
   { "Scope" = "scope.md" },
   { "Flake" = "flake.md" },
+  { "Generations" = "generations.md" },
+  { "Home Manager" = "home-manager.md" },
+  { "Packages" = [
+    "packages/index.md",
+  ] },
 ]
 
 extra_css = ["stylesheets/toggle-sidebar.css", "stylesheets/codeBlock.css", "stylesheets/open-in-new-tab.css", "stylesheets/placeholders.css"]
