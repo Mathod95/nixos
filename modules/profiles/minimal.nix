@@ -34,6 +34,10 @@
       kubectx
       k9s
       kubecolor
+      vim
+      bat
+      btop
+      zellij
     ];
   };
 }

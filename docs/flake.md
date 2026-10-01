@@ -32,7 +32,8 @@ todo:
 │   │   └── wsl.nix                    # NixOS-WSL
 │   ├── features/
 │   │   ├── systemd-boot.nix           # bootloader UEFI
-│   │   └── networkmanager.nix         # réseau
+│   │   ├── networkmanager.nix         # réseau
+│   │   └── gaming.nix                 # Steam
 │   ├── gui/
 │   │   ├── gui.nix                    # base graphique commune (clavier, audio, impression)
 │   │   └── gnome.nix                  # GDM + GNOME
@@ -41,7 +42,7 @@ todo:
 │   │   │   └── ghostty.nix            # terminal (profil gui)
 │   │   ├── k9s/
 │   │   │   └── k9s.nix                # outils console (profil minimal)
-│   │   └── …                          # eza, fastfetch, fd, fzf, git, helm, kubecolor, kubectl, kubectx
+│   │   └── …                          # une par application (liste complète dans Packages)
 │   └── users/
 │       └── mathod.nix                 # utilisateur + home-manager
 └── hosts/
@@ -97,11 +98,11 @@ Tous les inputs qui dépendent de nixpkgs le suivent avec `follows`. sops-nix et
 
 ## Hosts
 
-| Host          | Aspects                                            |
-| ------------- | -------------------------------------------------- |
-| `workstation` | `minimal` + `gui` + `gnome` + `desktop` + `mathod` |
-| `laptop`      | `minimal` + `gui` + `gnome` + `laptop` + `mathod`  |
-| `wsl`         | `minimal` + `wsl` + `mathod`                       |
+| Host          | Aspects                                                       |
+| ------------- | ------------------------------------------------------------- |
+| `workstation` | `minimal` + `gui` + `gnome` + `desktop` + `gaming` + `mathod` |
+| `laptop`      | `minimal` + `gui` + `gnome` + `laptop` + `gaming` + `mathod`  |
+| `wsl`         | `minimal` + `wsl` + `mathod`                                  |
 
 Les profils `desktop` et `laptop` importent pour l'instant les mêmes fonctionnalités (`systemd-boot`, `networkmanager`). Ils divergeront avec les réglages propres aux portables (batterie, veille…).
 

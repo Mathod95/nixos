@@ -21,6 +21,11 @@
     # Applications graphiques, ajoutées à chaque utilisateur home-manager de la machine
     home-manager.sharedModules = with inputs.self.modules.homeManager; [
       ghostty
+      vscode
+      telegram
+      discord
+      spotify
+      plex
     ];
   };
 }

@@ -6,6 +6,7 @@
       gui
       gnome
       desktop
+      gaming
       mathod
       ./_hardware-configuration.nix
       {

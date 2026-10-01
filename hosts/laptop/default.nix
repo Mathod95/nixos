@@ -6,6 +6,7 @@
       gui
       gnome
       laptop
+      gaming
       mathod
       ./_hardware-configuration.nix
       {
