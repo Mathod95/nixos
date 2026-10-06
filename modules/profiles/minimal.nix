@@ -38,6 +38,7 @@
       bat
       btop
       zellij
+      adb
     ];
   };
 }

@@ -33,7 +33,8 @@ todo:
 │   ├── features/
 │   │   ├── systemd-boot.nix           # bootloader UEFI
 │   │   ├── networkmanager.nix         # réseau
-│   │   └── gaming.nix                 # Steam
+│   │   ├── gaming.nix                 # Steam
+│   │   └── docker.nix                 # Docker
 │   ├── gui/
 │   │   ├── gui.nix                    # base graphique commune (clavier, audio, impression)
 │   │   └── gnome.nix                  # GDM + GNOME
@@ -98,11 +99,11 @@ Tous les inputs qui dépendent de nixpkgs le suivent avec `follows`. sops-nix et
 
 ## Hosts
 
-| Host          | Aspects                                                       |
-| ------------- | ------------------------------------------------------------- |
-| `workstation` | `minimal` + `gui` + `gnome` + `desktop` + `gaming` + `mathod` |
-| `laptop`      | `minimal` + `gui` + `gnome` + `laptop` + `gaming` + `mathod`  |
-| `wsl`         | `minimal` + `wsl` + `mathod`                                  |
+| Host          | Aspects                                                                  |
+| ------------- | ------------------------------------------------------------------------ |
+| `workstation` | `minimal` + `gui` + `gnome` + `desktop` + `gaming` + `docker` + `mathod` |
+| `laptop`      | `minimal` + `gui` + `gnome` + `laptop` + `gaming` + `docker` + `mathod`  |
+| `wsl`         | `minimal` + `wsl` + `mathod`                                             |
 
 Les profils `desktop` et `laptop` importent pour l'instant les mêmes fonctionnalités (`systemd-boot`, `networkmanager`). Ils divergeront avec les réglages propres aux portables (batterie, veille…).
 

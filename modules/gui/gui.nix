@@ -26,6 +26,7 @@
       discord
       spotify
       plex
+      chrome
     ];
   };
 }

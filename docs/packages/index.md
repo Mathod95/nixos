@@ -42,6 +42,8 @@ Les machines d'un élément découlent des aspects qu'elles importent (voir [Fla
 | [Spotify](https://www.spotify.com/)                                          | home-manager | `home.packages`   | [`modules/programs/spotify/spotify.nix`](https://github.com/Mathod95/nixos/blob/main/modules/programs/spotify/spotify.nix)         | workstation, laptop      |
 | [Plex Desktop](https://www.plex.tv/media-server-downloads/?cat=plex+desktop) | home-manager | `home.packages`   | [`modules/programs/plex/plex.nix`](https://github.com/Mathod95/nixos/blob/main/modules/programs/plex/plex.nix)                     | workstation, laptop      |
 | [Steam](https://store.steampowered.com/)                                     | NixOS        | `programs.steam`  | [`modules/features/gaming.nix`](https://github.com/Mathod95/nixos/blob/main/modules/features/gaming.nix)                           | workstation, laptop      |
+| [Google Chrome](https://www.google.com/chrome/)                              | home-manager | `home.packages`   | [`modules/programs/chrome/chrome.nix`](https://github.com/Mathod95/nixos/blob/main/modules/programs/chrome/chrome.nix)             | workstation, laptop      |
+| [adb](https://developer.android.com/tools/adb) (`android-tools`)             | home-manager | `home.packages`   | [`modules/programs/adb/adb.nix`](https://github.com/Mathod95/nixos/blob/main/modules/programs/adb/adb.nix)                         | workstation, laptop, wsl |
 
 ## Desktop
 
@@ -58,6 +60,8 @@ Les machines d'un élément découlent des aspects qu'elles importent (voir [Fla
 | ------------------------------------------------------------------------------- | ---------- | --------------------------- | ------------------------------------------------------------------------------------------------------------------------ | ------------------------ |
 | [systemd-boot](https://www.freedesktop.org/wiki/Software/systemd/systemd-boot/) | NixOS      | `boot.loader.systemd-boot`  | [`modules/features/systemd-boot.nix`](https://github.com/Mathod95/nixos/blob/main/modules/features/systemd-boot.nix)     | workstation, laptop      |
 | [NetworkManager](https://networkmanager.dev/)                                   | NixOS      | `networking.networkmanager` | [`modules/features/networkmanager.nix`](https://github.com/Mathod95/nixos/blob/main/modules/features/networkmanager.nix) | workstation, laptop      |
+| [Docker](https://www.docker.com/)                                               | NixOS      | `virtualisation.docker`     | [`modules/features/docker.nix`](https://github.com/Mathod95/nixos/blob/main/modules/features/docker.nix)                 | workstation, laptop      |
+| [Docker Desktop](https://docs.docker.com/desktop/features/wsl/) (intégration)   | NixOS      | `wsl.docker-desktop`        | [`modules/profiles/wsl.nix`](https://github.com/Mathod95/nixos/blob/main/modules/profiles/wsl.nix)                       | wsl                      |
 | [NixOS-WSL](https://github.com/nix-community/NixOS-WSL)                         | NixOS      | `wsl`                       | [`modules/profiles/wsl.nix`](https://github.com/Mathod95/nixos/blob/main/modules/profiles/wsl.nix)                       | wsl                      |
 | Dédoublonnage du store                                                          | NixOS      | `nix.optimise`              | [`modules/profiles/minimal.nix`](https://github.com/Mathod95/nixos/blob/main/modules/profiles/minimal.nix)               | workstation, laptop, wsl |
 

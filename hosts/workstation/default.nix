@@ -7,6 +7,7 @@
       gnome
       desktop
       gaming
+      docker
       mathod
       ./_hardware-configuration.nix
       {
