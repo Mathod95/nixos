@@ -29,7 +29,7 @@ todo:
 │   │   ├── systems.nix                # architectures supportées (x86_64-linux)
 │   │   ├── modules.nix                # active le registre flake.modules
 │   │   ├── formatter.nix              # nix fmt → nixfmt
-│   │   └── bootstrap.nix              # nix run .#bootstrap: clé age + premier switch
+│   │   └── bootstrap.nix              # nix run .#bootstrap: vérification, clé age, switch
 │   ├── profiles/
 │   │   ├── minimal.nix                # base commune à toutes les machines
 │   │   ├── desktop.nix                # PC fixes: workstation, desktop
@@ -174,7 +174,7 @@ Commandes utilisées, dans l'ordre, pour créer ce squelette depuis la racine du
 $ nix --extra-experimental-features 'nix-command flakes' run --refresh github:Mathod95/nixos#bootstrap -- <host>
 ```
 
-La commande `bootstrap` est fournie par le flake (`modules/flake/bootstrap.nix`). Elle dépose la clé age sur la machine, en demandant sa passphrase, puis lance le premier switch. Le détail est dans [SSH](ssh.md#new-machine).
+La commande `bootstrap` est fournie par le flake (`modules/flake/bootstrap.nix`). Elle vérifie que le repo décrit bien la machine, dépose la clé age en demandant sa passphrase, puis lance le switch. Le détail est dans [SSH](ssh.md#new-machine).
 
 **Toutes les mises à jour suivantes**, avec nh:
 
@@ -187,10 +187,13 @@ Depuis un clone local du repo: `nh os switch .`.
 !!! info "Flakes on a fresh install"
     L'option `--extra-experimental-features 'nix-command flakes'` n'est nécessaire que sur une installation fraîche, où les flakes sont désactivés. La config les active ensuite de façon permanente (profil `minimal`).
 
-!!! danger "When one command is not enough"
-    - **Machine réinstallée**: Une réinstallation crée de nouvelles partitions, avec de nouveaux identifiants. Il faut d'abord remplacer `hosts/<machine>/_hardware-configuration.nix` par celui de la nouvelle installation, sinon la machine ne redémarre pas après le switch. disko supprimera ce problème.
+!!! info "When the command stops"
+    Avant de toucher à quoi que ce soit, `bootstrap` vérifie que le repo décrit la machine telle qu'elle est. Il s'arrête avec un message clair dans deux cas:
+
     - **Machine absente du flake**: Il faut d'abord créer son dossier dans `hosts/`.
-    - **Utilisateur d'installation**: Il doit s'appeler `mathod`, pour conserver son mot de passe et l'accès à `sudo`.
+    - **Disque différent de celui du repo** (machine réinstallée, ou mauvais nom): Il faut d'abord remplacer `hosts/<machine>/_hardware-configuration.nix` par celui de l'installation actuelle. Sans cette vérification, la machine ne redémarrerait pas après le switch. disko supprimera ce cas.
+
+    L'utilisateur créé à l'installation doit s'appeler `mathod`, pour conserver son mot de passe et l'accès à `sudo`. Ce point n'est pas vérifié.
 
 !!! warning "First switch"
     - **Nom d'hôte**: Une machine fraîchement installée s'appelle encore `nixos`. Le nom de sa configuration est donc obligatoire (`-- workstation`), et le nom d'hôte change avec le switch.

@@ -154,9 +154,10 @@ Une machine ne peut déchiffrer les secrets que si elle a la clé age. La comman
 $ nix --extra-experimental-features 'nix-command flakes' run --refresh github:Mathod95/nixos#bootstrap -- <host>
 ```
 
-1. Elle déchiffre `secrets/age-key.txt.age`, en demandant la passphrase de la clé age.
-2. Elle dépose la clé dans `/var/lib/sops-nix/key.txt`, lisible uniquement par root. Si la clé est déjà en place, l'étape est ignorée.
-3. Elle lance `nixos-rebuild switch` sur la configuration de la machine.
+1. Elle vérifie que la machine est déclarée dans le flake et que son disque est bien celui décrit dans le repo. Sinon, elle s'arrête sans rien modifier.
+2. Elle déchiffre `secrets/age-key.txt.age`, en demandant la passphrase de la clé age.
+3. Elle dépose la clé dans `/var/lib/sops-nix/key.txt`, lisible uniquement par root. Si la clé est déjà en place, l'étape est ignorée.
+4. Elle lance `nixos-rebuild switch` sur la configuration de la machine.
 
 C'est la seule étape manuelle: Aucune automatisation ne peut taper la passphrase à la place de son propriétaire. Elle ne se fait qu'une fois par machine. Sans la clé, un switch signale une erreur de sops et la clé SSH n'est pas déposée, mais le reste du système est appliqué.
 
