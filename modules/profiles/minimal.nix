@@ -27,6 +27,9 @@
     i18n.defaultLocale = "fr_FR.UTF-8";
     console.keyMap = "fr";
 
+    # Pare-feu désactivé sur toutes les machines (voir docs/firewall.md)
+    networking.firewall.enable = false;
+
     # Outils console, ajoutés à chaque utilisateur home-manager de la machine
     home-manager.sharedModules = with inputs.self.modules.homeManager; [
       git

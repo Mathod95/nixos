@@ -17,6 +17,7 @@ nav = [
   { "Generations" = "generations.md" },
   { "Home Manager" = "home-manager.md" },
   { "SSH" = "ssh.md" },
+  { "Firewall" = "firewall.md" },
   { "Packages" = [
     "packages/index.md",
   ] },
