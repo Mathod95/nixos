@@ -251,22 +251,17 @@ creation_rules:
     age: age1...
 ```
 
-``` { .nix .codeblock title="modules/profiles/minimal.nix" }
+``` { .nix .codeblock title="modules/features/sops.nix" }
 sops = {
   defaultSopsFile = inputs.self + "/secrets/common.yaml";
   age.keyFile = "/var/lib/sops-nix/key.txt";
-  # Ne pas utiliser les clés SSH d'hôte
+  # Les clés SSH d'hôte ne servent pas à déchiffrer
   age.sshKeyPaths = [ ];
   gnupg.sshKeyPaths = [ ];
-
-  # La clé SSH perso, déployée sur chaque machine
-  secrets."ssh/mathod" = {
-    owner = "mathod";
-    mode = "0600";
-    path = "/home/mathod/.ssh/id_ed25519";
-  };
 };
 ```
+
+La mise en place réelle de la clé SSH `nixos` (création des clés, serveur, client, nouvelle machine) est décrite dans [SSH](ssh.md).
 
 Pour éditer un secret, sops lit la copie de la clé présente sur la machine:
 

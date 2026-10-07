@@ -1,0 +1,5 @@
+Host workstation laptop desktop wsl
+    HostName %h.local
+    User mathod
+    IdentityFile ~/.ssh/nixos
+    AddKeysToAgent yes

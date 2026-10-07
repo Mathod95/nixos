@@ -16,6 +16,7 @@ nav = [
   { "Flake" = "flake.md" },
   { "Generations" = "generations.md" },
   { "Home Manager" = "home-manager.md" },
+  { "SSH" = "ssh.md" },
   { "Packages" = [
     "packages/index.md",
   ] },

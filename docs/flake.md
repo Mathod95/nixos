@@ -20,11 +20,16 @@ todo:
 .
 ├── flake.nix                          # inputs + import automatique de modules/ et hosts/
 ├── flake.lock                         # commit exact de chaque input
+├── .sops.yaml                         # clé age utilisée pour chiffrer secrets/
+├── secrets/
+│   ├── age-key.txt.age                # clé age, chiffrée par passphrase
+│   └── common.yaml                    # secrets chiffrés (sops)
 ├── modules/
 │   ├── flake/
 │   │   ├── systems.nix                # architectures supportées (x86_64-linux)
 │   │   ├── modules.nix                # active le registre flake.modules
-│   │   └── formatter.nix              # nix fmt → nixfmt
+│   │   ├── formatter.nix              # nix fmt → nixfmt
+│   │   └── bootstrap.nix              # nix run .#bootstrap: clé age + premier switch
 │   ├── profiles/
 │   │   ├── minimal.nix                # base commune à toutes les machines
 │   │   ├── desktop.nix                # PC fixes: workstation, desktop
@@ -34,7 +39,9 @@ todo:
 │   │   ├── systemd-boot.nix           # bootloader UEFI
 │   │   ├── networkmanager.nix         # réseau
 │   │   ├── gaming.nix                 # Steam
-│   │   └── docker.nix                 # Docker
+│   │   ├── docker.nix                 # Docker
+│   │   ├── sops.nix                   # secrets (sops-nix)
+│   │   └── ssh.nix                    # serveur SSH + mDNS
 │   ├── gui/
 │   │   ├── gui.nix                    # base graphique commune (clavier, audio, impression)
 │   │   └── gnome.nix                  # GDM + GNOME
@@ -94,8 +101,9 @@ todo:
 | `import-tree`  | `main`           | Import automatique des fichiers `.nix`              |
 | `home-manager` | `master`         | Configuration utilisateur                           |
 | `nixos-wsl`    | `main`           | Modules NixOS pour WSL                              |
+| `sops-nix`     | `master`         | Déchiffrement des secrets sur les machines          |
 
-Tous les inputs qui dépendent de nixpkgs le suivent avec `follows`. sops-nix et disko seront ajoutés aux étapes Secrets et Partitioning.
+Tous les inputs qui dépendent de nixpkgs le suivent avec `follows`. disko sera ajouté à l'étape Partitioning.
 
 ## Hosts
 
@@ -160,24 +168,28 @@ Commandes utilisées, dans l'ordre, pour créer ce squelette depuis la racine du
 
 ## Usage
 
-Sur une machine déjà sous NixOS, depuis le repo cloné:
+**Première fois sur une machine**, installation fraîche ou machine qui n'a pas encore la clé age:
 
 ``` { .console .codeblock }
-$ sudo nixos-rebuild switch --flake .#<host>
+$ nix --extra-experimental-features 'nix-command flakes' run github:Mathod95/nixos#bootstrap -- <host>
 ```
 
-Ou directement depuis GitHub, sans cloner le repo:
+La commande `bootstrap` est fournie par le flake (`modules/flake/bootstrap.nix`). Elle dépose la clé age sur la machine, en demandant sa passphrase, puis lance le premier switch. Le détail est dans [SSH](ssh.md#new-machine).
+
+**Toutes les mises à jour suivantes**, avec nh:
 
 ``` { .console .codeblock }
-$ sudo nixos-rebuild switch --flake github:Mathod95/nixos#<host>
+$ nh os switch github:Mathod95/nixos --refresh
 ```
+
+Depuis un clone local du repo: `nh os switch .`.
 
 !!! info "Flakes on a fresh install"
-    `nixos-rebuild --flake` active lui-même les flakes pour sa commande, même sur une installation fraîche où ils sont désactivés. Si l'erreur `experimental Nix feature 'flakes' is disabled` apparaît malgré tout, ajouter `--option experimental-features 'nix-command flakes'`. La config les active ensuite de façon permanente (profil `minimal`).
+    L'option `--extra-experimental-features 'nix-command flakes'` n'est nécessaire que sur une installation fraîche, où les flakes sont désactivés. La config les active ensuite de façon permanente (profil `minimal`).
 
-!!! warning "Premier switch"
-    - **Nom d'hôte**: Les machines installées s'appellent encore `nixos`. Le premier switch se fait donc en nommant la machine explicitement (`.#workstation`), et le nom d'hôte change avec lui.
-    - **WSL**: L'utilisateur par défaut passe de `nixos` à `mathod`. NixOS-WSL demande pour ça une procédure spéciale (`nixos-rebuild boot`, pas `switch`, puis redémarrage de la distro), décrite dans la [documentation NixOS-WSL](https://nix-community.github.io/NixOS-WSL/how-to/change-username.html).
+!!! warning "First switch"
+    - **Nom d'hôte**: Une machine fraîchement installée s'appelle encore `nixos`. Le nom de sa configuration est donc obligatoire (`-- workstation`), et le nom d'hôte change avec le switch.
+    - **WSL**: L'utilisateur par défaut passe de `nixos` à `mathod`. NixOS-WSL demande pour ça une procédure spéciale (`nixos-rebuild boot`, pas `switch`, puis redémarrage de la distro), décrite dans la [documentation NixOS-WSL](https://nix-community.github.io/NixOS-WSL/how-to/change-username.html). Le `bootstrap` ne la gère pas.
 
 ## Changes from the generated configuration
 

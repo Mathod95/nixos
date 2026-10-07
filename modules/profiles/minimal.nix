@@ -2,6 +2,11 @@
 {
   # Base commune à toutes les machines, WSL compris
   flake.modules.nixos.minimal = {
+    imports = with inputs.self.modules.nixos; [
+      sops
+      ssh
+    ];
+
     nix.settings.experimental-features = [
       "nix-command"
       "flakes"
@@ -39,6 +44,9 @@
       btop
       zellij
       adb
+      ssh
+      age
+      sops
     ];
   };
 }

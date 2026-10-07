@@ -13,6 +13,14 @@
         ]
         ++ lib.optional config.networking.networkmanager.enable "networkmanager"
         ++ lib.optional config.virtualisation.docker.enable "docker";
+        # La clé "nixos" ouvre la connexion SSH depuis n'importe quelle machine
+        openssh.authorizedKeys.keyFiles = [ ../programs/ssh/nixos.pub ];
+      };
+
+      # Clé privée SSH "nixos", déchiffrée par sops dans /run/secrets/ssh/nixos
+      sops.secrets."ssh/nixos" = {
+        owner = "mathod";
+        mode = "0600";
       };
 
       home-manager = {
