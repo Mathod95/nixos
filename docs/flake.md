@@ -171,7 +171,7 @@ Commandes utilisées, dans l'ordre, pour créer ce squelette depuis la racine du
 **Première fois sur une machine**, installation fraîche ou machine qui n'a pas encore la clé age:
 
 ``` { .console .codeblock }
-$ nix --extra-experimental-features 'nix-command flakes' run github:Mathod95/nixos#bootstrap -- <host>
+$ nix --extra-experimental-features 'nix-command flakes' run --refresh github:Mathod95/nixos#bootstrap -- <host>
 ```
 
 La commande `bootstrap` est fournie par le flake (`modules/flake/bootstrap.nix`). Elle dépose la clé age sur la machine, en demandant sa passphrase, puis lance le premier switch. Le détail est dans [SSH](ssh.md#new-machine).
@@ -186,6 +186,11 @@ Depuis un clone local du repo: `nh os switch .`.
 
 !!! info "Flakes on a fresh install"
     L'option `--extra-experimental-features 'nix-command flakes'` n'est nécessaire que sur une installation fraîche, où les flakes sont désactivés. La config les active ensuite de façon permanente (profil `minimal`).
+
+!!! danger "When one command is not enough"
+    - **Machine réinstallée**: Une réinstallation crée de nouvelles partitions, avec de nouveaux identifiants. Il faut d'abord remplacer `hosts/<machine>/_hardware-configuration.nix` par celui de la nouvelle installation, sinon la machine ne redémarre pas après le switch. disko supprimera ce problème.
+    - **Machine absente du flake**: Il faut d'abord créer son dossier dans `hosts/`.
+    - **Utilisateur d'installation**: Il doit s'appeler `mathod`, pour conserver son mot de passe et l'accès à `sudo`.
 
 !!! warning "First switch"
     - **Nom d'hôte**: Une machine fraîchement installée s'appelle encore `nixos`. Le nom de sa configuration est donc obligatoire (`-- workstation`), et le nom d'hôte change avec le switch.

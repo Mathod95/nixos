@@ -7,7 +7,7 @@ Configuration NixOS personnelle en Nix flakes. La documentation du projet est pu
 À lancer une fois par machine, sur une installation fraîche ou sur une machine qui n'a pas encore la clé age, en remplaçant `workstation` par le nom de la machine (`workstation`, `laptop`, `wsl`):
 
 ```bash
-nix --extra-experimental-features 'nix-command flakes' run github:Mathod95/nixos#bootstrap -- workstation
+nix --extra-experimental-features 'nix-command flakes' run --refresh github:Mathod95/nixos#bootstrap -- workstation
 ```
 
 La commande enchaîne deux étapes:
@@ -18,9 +18,17 @@ La commande enchaîne deux étapes:
 À savoir:
 
 - **Nom de la machine**: Il est obligatoire sur une installation fraîche, qui s'appelle encore `nixos`. Sur une machine déjà nommée, il peut être omis.
+- `--refresh` force Nix à récupérer le dernier commit, au lieu d'une version gardée en cache jusqu'à une heure.
 - **Flakes**: L'option `--extra-experimental-features` n'est nécessaire que sur une installation fraîche. La configuration les active ensuite de façon permanente.
 - **Mot de passe**: La configuration n'en définit aucun, celui créé à l'installation est conservé.
 - **Redémarrer** ensuite, pour que le nom d'hôte et les groupes soient pris en compte partout.
+
+### When one command is not enough
+
+- **Machine réinstallée**: Une réinstallation crée de nouvelles partitions, avec de nouveaux identifiants. Il faut d'abord remplacer `hosts/<machine>/_hardware-configuration.nix` par celui de la nouvelle installation, sinon la machine ne redémarre pas après le switch.
+- **Machine absente du flake**: Il faut d'abord créer son dossier dans `hosts/`.
+- **Distro WSL neuve**: Le changement d'utilisateur `nixos` vers `mathod` demande la [procédure de NixOS-WSL](https://nix-community.github.io/NixOS-WSL/how-to/change-username.html).
+- **Utilisateur d'installation**: Il doit s'appeler `mathod`, pour conserver son mot de passe et l'accès à `sudo`.
 
 ## Updates
 

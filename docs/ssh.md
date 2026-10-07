@@ -151,7 +151,7 @@ $ SOPS_AGE_KEY_FILE=key.txt sops -d secrets/common.yaml | head -3
 Une machine ne peut déchiffrer les secrets que si elle a la clé age. La commande `bootstrap` du flake la dépose, puis lance le switch:
 
 ``` { .console .codeblock }
-$ nix --extra-experimental-features 'nix-command flakes' run github:Mathod95/nixos#bootstrap -- <host>
+$ nix --extra-experimental-features 'nix-command flakes' run --refresh github:Mathod95/nixos#bootstrap -- <host>
 ```
 
 1. Elle déchiffre `secrets/age-key.txt.age`, en demandant la passphrase de la clé age.
